@@ -25,47 +25,46 @@ function createInvoice(invoice, path) {
 
 function generateHeader(doc) {
   doc
-    .image("xhp_logo.png", 50, 45, { width: 150 })
-    .image("xhp_profile.png", 430, 42, { width: 27})
-     generateHr(doc, 80);
+    .image("xhp_logo.png", 50, 33, { width: 150 })
+    .image("xhp_profile.png", 452, 28.68, { width: 27})
+     generateHr(doc, 75);
   doc
-    .lineWidth(2)
-    .moveTo(470, 45)
-    .lineTo(470, 65)
+    .lineWidth(1.3)
+    .moveTo(489, 32 )
+    .lineTo(489, 52)
     .stroke()
-    .fillColor("#ff5120");
+    .fillColor("#FF4F00");  
 
   doc.fontSize(13).font('Helvetica')
-    .text("Produze",480,50)
-    .fillColor("#ff5120");
+    .text("Produze",497,37)
+    .fillColor("#FF4F00");
 }
 
 function fieldTab(doc){
-  doc.roundedRect(50, 90, 120, 22, 5).fillAndStroke('#d9d9f0');
-  
-  doc.fill('#292929').stroke();
-  doc.image("xhp_bkm.png", 55, 95, { width: 10});
+  doc.roundedRect(50, 91, 115, 22, 5).fillAndStroke('#d9d9f0');
+  doc.fill('#091649').stroke();
+  doc.image("xhp_bookmark.png", 55, 96, { width: 10});
   doc.fontSize(8);
-  doc.text(" Quote ID : XQ02231513", 70, 97, {lineBreak: false} );
+  doc.text(" Quote ID : XQ02231513", 70, 98, {lineBreak: false} );
   // doc.image("logo.png", 50, 45, { width: 150 });
 
-  doc.roundedRect(180, 90, 65, 22, 5).fillAndStroke('#d9d9f0');
-  doc.fill('#292929').stroke();
-  doc.image("xhp_commo.png", 185, 95, { width: 10});
+  doc.roundedRect(175, 91, 65, 22, 5).fillAndStroke('#d9d9f0');
+  doc.fill('#091649').stroke();
+  doc.image("xhp_kind.png", 180, 96, { width: 10});
   doc.fontSize(8);
-  doc.text("Type : LCL", 200, 97, {lineBreak: false} );
+  doc.text("Type : LCL", 195, 98, {lineBreak: false} );
 
-  doc.roundedRect(255, 90, 125, 22, 5).fillAndStroke('#d9d9f0');
-  doc.fill('#292929').stroke();
-  doc.image("xhp_cal.png", 265, 95, { width: 10});
+  doc.roundedRect(250, 91, 120, 22, 5).fillAndStroke('#d9d9f0');
+  doc.fill('#091649').stroke();
+  doc.image("xhp_calendar.png", 255, 96, { width: 10});
   doc.fontSize(8);
-  doc.text("Sailing Date : 27-03-2023", 280, 97, {lineBreak: false} );
+  doc.text("Sailing Date : 27-03-2023", 270, 98, {lineBreak: false} );
 
-  doc.roundedRect(390, 90, 105, 22, 5).fillAndStroke('#d9d9f0');
-  doc.fill('#292929').stroke();
-  doc.image("xhp_dist.png", 395, 95, { width: 10});
+  doc.roundedRect(380, 91, 105, 22, 5).fillAndStroke('#d9d9f0');
+  doc.fill('#091649').stroke();
+  doc.image("xhp_route.png", 385, 96, { width: 10});
   doc.fontSize(8);
-  doc.text("Transit Time : 26 days", 410, 97, {lineBreak: false} );
+  doc.text("Transit Time : 26 days", 400, 98, {lineBreak: false} );
 }
 
 function createTable(doc){
@@ -90,22 +89,29 @@ function createTable(doc){
     .moveTo(455, temp)
     .lineTo(455, 144.99599999999998+22)
     .stroke();  
+
+    const val1 = "27699.22 INR";
+    const val2 = 27699.22;
+    const total = val1+val2;
+
    const table01 = {
     "headers" : ["Charge Type", "Charge Name", "Unit of Measurement", "Price"],
      "rows": [
-         [ "Origin", "All-Inclusive port-to-door rate", "Per CPM", " 27,699.22 INR " ],
-         [ " ", " ", "Total : ", "27,699.22 INR "],
-         
+         [ "Origin", "All-Inclusive port-to-door rate", "Per CPM", val1 ],
+        //  [ " ", " ", "Per CPM", val1 ],
+         [ " ", " ", "Total : ", val1],
      ],
      
    };
    
-   doc.table(table01, {
+   doc.table(table01, 
+    // [[{text : 'Cell 1', style : 'rounded'}]],
+    {
      columnSpacing: 10,
      padding: 5,
      columnsSize: [100, 170, 135, 100],
-     align: "right",
-     prepareHeader: () => doc.fontSize(8).fillColor('#292929'),
+     align: "center",
+     prepareHeader: () => doc.fontSize(8).fillColor('#091649'),
      prepareRow: (row, indexColumn, indexRow, rectRow, rectCell) => {
  
        const {x, y, width, height} = rectCell;
@@ -123,7 +129,7 @@ function createTable(doc){
        .lineTo(x + width, y + height)
        .stroke();
  
-       doc.fontSize(8).fillColor('#292929');
+       doc.fontSize(8).fillColor('#091649');
        temp1 = x;
        temp2 = y + height;
        
@@ -143,8 +149,8 @@ if(temp2 > 426){
    }
   let height =5;
   console.log(temp2); 
-  doc.roundedRect(50, temp2+15, 505, 40, 5).fillAndStroke('#d9d9f0',"#292929");
-  doc.fill('#292929').stroke();
+  doc.roundedRect(50, temp2+15, 505, 40, 5).fillAndStroke('#d9d9f0',"#091649");
+  doc.fill('#091649').stroke();
   doc.fontSize(6);
   temp2 = temp2+15
   doc.text(" ",55,temp2+height)
@@ -156,17 +162,19 @@ if(temp2 > 426){
 
 function addressBox(doc){
   boxWidth = 160;
-  doc.roundedRect(50, temp2+15, 505, boxWidth,5).fillAndStroke('white',"#292929");
+  doc.roundedRect(50, temp2+15, 505, boxWidth,5).fillAndStroke('white',"#091649");
 
-  doc.roundedRect(55, temp2+145, 115, 22,5).fillAndStroke('#d9d9f0');
-  doc.fill('#292929').stroke();
-  doc.fontSize(8);
-  doc.text("Origin Custom Clearance", 60, temp2+152, {lineBreak: false} );
+  doc.roundedRect(55, temp2+145, 105, 22,5).fillAndStroke('#d9d9f0');
+  doc.fill('#091649').stroke();
+  doc.image("xhp_correct.png", 60, temp2+151, { width: 10});
+  doc.fontSize(7);
+  doc.text("Origin Custom Clearance", 75, temp2+154, {lineBreak: false} );
 
-  doc.roundedRect(175, temp2+145, 135, 22,5).fillAndStroke('#d9d9f0');
-  doc.fill('#292929').stroke();
-  doc.fontSize(8);
-  doc.text("Destination Custom Clearance", 185, temp2+152, {lineBreak: false} );
+  doc.roundedRect(170, temp2+145, 125, 22,5).fillAndStroke('white',"#091649");
+  doc.fill('#091649').stroke();
+  doc.image("xhp_cross.png", 175, temp2+151, { width: 10});
+  doc.fontSize(7);
+  doc.text("Destination Custom Clearance", 190, temp2+154, {lineBreak: false} );
 
   let col1LeftPos = 65;
   let height = 30;
@@ -176,39 +184,42 @@ function addressBox(doc){
   let col2LeftPos = colWidth + col1LeftPos + 40;
 
   doc.fontSize(8)
-    .image("xhp_dist.png", col1LeftPos, colTop-2, { width: 10})
+    .image("xhp_route.png", col1LeftPos, colTop-2, { width: 10})
     .text('Origin * Door, IND', col1LeftPos+imageWidth, colTop, {width: colWidth})
     .text('B11/7 & B11/8 IDA Uppal, 500039', col2LeftPos, colTop, {width: colWidth+100})
   colTop = colTop + height;
   doc.fontSize(8)
-    .image("xhp_dist.png", col1LeftPos, colTop-2, { width: 10})
+    .image("xhp_route.png", col1LeftPos, colTop-2, { width: 10})
     .text('Destination * Amazon FC, USA', col1LeftPos+imageWidth, colTop, {width: colWidth})
     .text('AVP1 - 550 Oak Ridge Road, Hazleton, PA 18202', col2LeftPos, colTop, {width: colWidth+100})
   colTop = colTop + height;
   doc.fontSize(8)
-    .image("xhp_ship.png", col1LeftPos, colTop-2, { width: 10})
+    .image("xhp_money.png", col1LeftPos, colTop-2, { width: 10})
     .text('Shipment Incoterms', col1LeftPos+imageWidth, colTop, {width: colWidth})
     .text('DDP', col2LeftPos, colTop, {width: colWidth+100})
   colTop = colTop + height
   doc.fontSize(8)
-    .image("xhp_commo.png", col1LeftPos, colTop-2, { width: 10})
+    .image("xhp_kind.png", col1LeftPos, colTop-2, { width: 10})
     .text('Commodity Description', col1LeftPos+imageWidth, colTop, {width: colWidth})
     .text('Kids toys and board games, puzzles', col2LeftPos, colTop, {width: colWidth+100})
 
-  doc.roundedRect(320, temp2+145, 50, 22,5).fillAndStroke('#d9d9f0');
-  doc.fill('#292929').stroke();
-  doc.fontSize(8);
-  doc.text("Stackable", 325, temp2+152, {lineBreak: false} );
+  doc.roundedRect(305, temp2+145, 60, 22,5).fillAndStroke('#d9d9f0');
+  doc.fill('#091649').stroke();
+  doc.image("xhp_correct.png", 310, temp2+151, { width: 10});
+  doc.fontSize(7);
+  doc.text("Stackable", 325, temp2+154, {lineBreak: false} );
 
-  doc.roundedRect(380, temp2+145, 60, 22,5).fillAndStroke('#d9d9f0');
-  doc.fill('#292929').stroke();
-  doc.fontSize(8);
-  doc.text("Palletization", 385, temp2+152, {lineBreak: false} );
+  doc.roundedRect(375, temp2+145, 65, 22,5).fillAndStroke('white',"#091649");
+  doc.fill('#091649').stroke();
+  doc.image("xhp_cross.png", 380, temp2+151, { width: 10});
+  doc.fontSize(7);
+  doc.text("Palletization", 395, temp2+154, {lineBreak: false} );
 
-  doc.roundedRect(450, temp2+145, 85, 22,5).fillAndStroke('#d9d9f0');
-  doc.fill('#292929').stroke();
-  doc.fontSize(8);
-  doc.text("hazardous Goods", 455, temp2+152, {lineBreak: false} );
+  doc.roundedRect(450, temp2+145, 85, 22,5).fillAndStroke('white',"#091649");;
+  doc.fill('#091649').stroke();
+  doc.image("xhp_cross.png", 455, temp2+151, { width: 10});
+  doc.fontSize(7);
+  doc.text("Hazardous Goods", 470, temp2+154, {lineBreak: false} );
 
   temp2 = temp2+boxWidth;
 
@@ -216,7 +227,7 @@ function addressBox(doc){
 
 function itemQuantity(doc){
   let height = 30;
-  doc.roundedRect(50, temp2+height, 505, 100,5).fillAndStroke('white',"#292929");
+  doc.roundedRect(50, temp2+height, 505, 100,5).fillAndStroke('white',"#091649");
   temp2 = temp2+height;
   doc.roundedRect(55, temp2+10, 495, 22,5).fillAndStroke('#d9d9f0');
   temp2 = temp2 + 10;
@@ -230,7 +241,7 @@ function itemQuantity(doc){
 
   doc
     .fontSize(8)
-    .fill('#292929')
+    .fill('#091649')
     .text('Items', col1LeftPos, colTop, {width: colWidth})
     .text('Dimensions', col2LeftPos, colTop, {width: colWidth+100})
     .text('Volume/ Item', col3LeftPos, colTop, {width: colWidth})
@@ -238,7 +249,7 @@ function itemQuantity(doc){
   colTop = colTop + height;
   doc
     .fontSize(8)
-    .fill('#292929')
+    .fill('#091649')
     .text('70 Boxes', col1LeftPos, colTop, {width: colWidth})
     .text('38 * 36 * 37 cm', col2LeftPos, colTop, {width: colWidth+100})
     .text('0.0506 CBM', col3LeftPos, colTop, {width: colWidth})
@@ -247,7 +258,7 @@ function itemQuantity(doc){
   colTop = colTop + height;
   doc
     .fontSize(8)
-    .fill('#292929')
+    .fill('#091649')
     .text('Total Cargo Volume : 3.5431 CBM', col1LeftPos, colTop, {width: colWidth+100})
     .text('Total Gross Weight : 433 kg', col2LeftPos+50, colTop, {width: colWidth+100})
   
@@ -258,12 +269,12 @@ function itemQuantity(doc){
 function page1Content(doc){
    let content = ""
     temp1 = 100
-   doc.fontSize(10).font('Helvetica-Bold').fillColor('#292929')
-   .text("Quotation Terms and Conditions",50,temp1+30).fillColor('#292929'),
+   doc.fontSize(10).font('Helvetica-Bold').fillColor('#091649')
+   .text("Quotation Terms and Conditions",50,temp1+30).fillColor('#091649'),
    doc.fontSize(8).font('Helvetica')
-   .text("Overview: ",50,temp1+60).fillColor('#292929'),
+   .text("Overview: ",50,temp1+60).fillColor('#091649'),
 
-   doc.fontSize(6).font ("Helvetica").fillColor('#292929'),
+   doc.fontSize(6).font ("Helvetica").fillColor('#091649'),
    doc.list([
     "Holaport Logistics Private Limited, hereby referred to as “Holaport”, operating under the brand name “Xhipment”, amongst other things through its digital platform,provides the Customer shipment, Sogistic services, freight forwarding services through its vendors " ,
     "Our offer(s) do not include the insurance. Please contact us for more details",
@@ -282,9 +293,9 @@ function page1Content(doc){
   });
 
   doc.fontSize(8).font('Helvetica')
-   .text("Definitions: ",50,temp1+185).fillColor('#292929'),
+   .text("Definitions: ",50,temp1+185).fillColor('#091649'),
 
-   doc.fontSize(6).font ("Helvetica").fillColor('#292929'),
+   doc.fontSize(6).font ("Helvetica").fillColor('#091649'),
    doc.list([
     " \"Customer\” shall mean any person who avails the Services " ,
     " \"Sevices\" shall mean the services as more specifically listed on the Quotation, including without \
@@ -303,10 +314,10 @@ function page1Content(doc){
     bulletRadius: 1, // use this value to almost hide the dots/bullets
   });
 
-  doc.fontSize(8).font('Helvetica').fillColor('#292929')
+  doc.fontSize(8).font('Helvetica').fillColor('#091649')
    .text("Terms and Conditions: ",50,temp1+255)
 
-   doc.fontSize(6).font ("Helvetica").fillColor('#292929'),
+   doc.fontSize(6).font ("Helvetica").fillColor('#091649'),
    doc.list([
     " Confidentiality : This offer, and quotation shall be the exclusive property of Holaport, and may not be reproduced or distributed in any way or used by the Customer except with the express prior written consent of Holaport. The Customer undertakes to keep this offer and quotation and any information provided by HoSaport strictly confidential and shall not disclose the same to any third party" ,
     " Insurance : Unless requested to do so in writing, and confirmed to Customer in writing, Holaport is under no obligation to procure insurance on Customer's behalf. In all cases, Customers shall pay all premiums and costs in connection with procuring necessary insurance.",
@@ -339,7 +350,7 @@ function page1Content(doc){
     bulletRadius: 1, // use this value to almost hide the dots/bullets
   });
 
-  doc.fontSize(6).font ("Helvetica").fillColor('#292929'),
+  doc.fontSize(6).font ("Helvetica").fillColor('#091649'),
   doc.list([
    "Rate : ",
  ], 50, temp1 + 428, {
@@ -377,7 +388,7 @@ function page1Content(doc){
   bulletRadius: 1, // use this value to almost hide the dots/bullets
 });
 
-doc.fontSize(6).font ("Helvetica").fillColor('#292929'),
+doc.fontSize(6).font ("Helvetica").fillColor('#091649'),
   doc.list([
    "Custom Duty, Detention and Demurrage Charges : ",
  ], 50, temp1 + 630, {
@@ -409,7 +420,7 @@ doc.fontSize(6).font ("Helvetica").fillColor('#292929'),
 //Content for new page
 doc.addPage()
 generateHeader(doc);
-doc.fontSize(6).font ("Helvetica").fillColor('#292929'),
+doc.fontSize(6).font ("Helvetica").fillColor('#091649'),
   doc.list([
    "Packaging : All shipments must be packaged in cartons, crates, or other packaging suitable for transportation or gandling by in accordance with industry standards. Cargo, which is insufficiently prepared, packed or protected will be, at the Customer/consignee sole risk and expense, including risk to third parties and subject to the terms and conditions of the bill of lading. All of Holaport\’s rights and immunities in the event of loss or damage by reason of that insufficient preparation, packaging or protection are hereby expressly reserved. ",
    "General Lien and Right to Sell Customer's Property  : "
@@ -440,7 +451,7 @@ doc.fontSize(6).font ("Helvetica").fillColor('#292929'),
   bulletRadius: 1, // use this value to almost hide the dots/bullets
 });
 
-doc.fontSize(6).font ("Helvetica").fillColor('#292929'),
+doc.fontSize(6).font ("Helvetica").fillColor('#091649'),
   doc.list([
    "Liability : Holaport will not be liable for damage or delays in any form (including, but not limited to, loss of data, indirect damages, consequential loss, pure economic loss, loss of opportunity, loss of revenue or profit, wrongful death, personal injury, property damage, penalties and fines, costs or any other loss) sustained by the Customer, your servants, agents, employees, insurers and third parties for whom you are liable pursuant to any legal relationship, unless you prove that the damage is a direct result of Holaport\’s gross negligence or willful misconduct. The total liability of Holaport shall not exceed the total amount of charges collected by Holaport from the Customer for the individual services performed giving rise to the claim or cause of action.",
    "Engagement of Third Parties : “Third Parties or Third Party” shall include, but not limited to the following - \"carriers, truckmen, cartmen, lightermen, forwarders, OTIs,customs brokers, agents, warehouse men and others to which the goods are entrusted for transportation, cartage, handling and/or delivery and/or storage or otherwise\". Unless services are performed by persons or firms engaged pursuant to express written instructions from you, we shall use reasonable care in our selection of Third Parties, or in selecting the means, route and procedure to be followed in the handling, transportation, clearance and delivery of the shipment. Communication by us that a particular person or firm has been selected to render services with respect to the goods, shall not be construed to mean that we warrant or represent that such person or firm will render such services nor do we assume responsibility or liability for any actions(s) and/or inaction(s) of such Third Parties and/or its agents, and shall not be liable for any delay or loss of any kind due to the negligence of a Third Party or the agent of a Third Party. All claims in connection with the act of a Third Party shall be brought solely against such party and/or its agents; in connection with any such claim, we shall reasonably cooperate with you, who shall be liable for any charges or costs incurred by us.",
@@ -499,7 +510,7 @@ doc.list([
 doc.addPage(),
 generateHeader(doc),
 
-doc.fontSize(6).font ("Helvetica").fillColor('#292929'),
+doc.fontSize(6).font ("Helvetica").fillColor('#091649'),
 doc.list([
    " Special Clauses :"
 

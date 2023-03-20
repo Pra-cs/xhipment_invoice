@@ -2,7 +2,7 @@ const { createInvoice } = require("./createInvoice.js");
 
 const invoice = {
   shipping: {
-    name: "John Doe",
+    name: "Prabhat",
     address: "1234 Main Street",
     city: "San Francisco",
     state: "CA",
