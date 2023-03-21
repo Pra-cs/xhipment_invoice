@@ -24,85 +24,97 @@ function createInvoice(invoice, path) {
 }
 
 function generateHeader(doc) {
-  doc
-    .image("xhp_logo.png", 50, 33, { width: 150 })
-    .image("xhp_profile.png", 452, 28.68, { width: 27})
+doc
+    .image("xhp_logo1.png", 45, 30, { width: 25 })
+doc
+    .lineWidth(1.63)
+    .moveTo(80, 31)
+    .lineTo(80, 55)
+    .fillAndStroke('#FF4F00')
+
+doc.image("xhp_logo2.png", 90, 30, { width: 160 })
+
+doc.image("xhp_profile.png", 447, 28.68, { width: 27})
      generateHr(doc, 75);
   doc
-    .lineWidth(1.3)
-    .moveTo(489, 32 )
-    .lineTo(489, 52)
-    .stroke()
-    .fillColor("#FF4F00");  
+    .lineWidth(1.63)
+    .moveTo(484, 33)
+    .lineTo(484, 53)
+    .fillAndStroke('#FF4F00')
+    // .fillColor("#FF4F00")
+    // .stroke();
 
-  doc.fontSize(13).font('Helvetica')
-    .text("Produze",497,37)
+    
+
+  doc.fontSize(13).font('Helvetica-Bold')
+    .text("Produze",492,37)
     .fillColor("#FF4F00");
 }
 
 function fieldTab(doc){
-  doc.roundedRect(50, 91, 115, 22, 5).fillAndStroke('#d9d9f0');
+  doc.roundedRect(45, 91, 115, 22, 3).fillAndStroke('#DDDDED');
   doc.fill('#091649').stroke();
-  doc.image("xhp_bookmark.png", 55, 96, { width: 10});
-  doc.fontSize(8);
-  doc.text(" Quote ID : XQ02231513", 70, 98, {lineBreak: false} );
+  doc.image("xhp_bookmark.png", 50, 96, { width: 10});
+  doc.fontSize(8).font('Helvetica').text(" Quote ID :", 65, 99);
+  doc.font('Helvetica-Bold').text("XQ02231513", 110, 99, {lineBreak: false} );
   // doc.image("logo.png", 50, 45, { width: 150 });
 
-  doc.roundedRect(175, 91, 65, 22, 5).fillAndStroke('#d9d9f0');
-  doc.fill('#091649').stroke();
-  doc.image("xhp_kind.png", 180, 96, { width: 10});
-  doc.fontSize(8);
-  doc.text("Type : LCL", 195, 98, {lineBreak: false} );
+  doc.roundedRect(170, 91, 65, 22, 3).fillAndStroke('#DDDDED');
+  doc.fill('#091649').stroke();    
+  doc.image("xhp_kind.png", 175, 96, { width: 10});
+  doc.fontSize(8).font('Helvetica').text("Type :", 190, 99);
+  doc.font('Helvetica-Bold').text("LCL", 215, 99, {lineBreak: false} );
 
-  doc.roundedRect(250, 91, 120, 22, 5).fillAndStroke('#d9d9f0');
+  doc.roundedRect(245, 91, 120, 22, 3).fillAndStroke('#DDDDED');
   doc.fill('#091649').stroke();
-  doc.image("xhp_calendar.png", 255, 96, { width: 10});
-  doc.fontSize(8);
-  doc.text("Sailing Date : 27-03-2023", 270, 98, {lineBreak: false} );
+  doc.image("xhp_calendar.png", 250, 96, { width: 10});
+  doc.fontSize(8).font('Helvetica').text("Sailing Date :", 265, 99);
+  doc.font('Helvetica-Bold').text("27-03-2023", 315, 99, {lineBreak: false} );
+  
 
-  doc.roundedRect(380, 91, 105, 22, 5).fillAndStroke('#d9d9f0');
+  doc.roundedRect(375, 91, 110, 22, 3).fillAndStroke('#DDDDED');
   doc.fill('#091649').stroke();
-  doc.image("xhp_route.png", 385, 96, { width: 10});
-  doc.fontSize(8);
-  doc.text("Transit Time : 26 days", 400, 98, {lineBreak: false} );
+  doc.image("xhp_route.png", 380, 96, { width: 10});
+  doc.fontSize(8).font('Helvetica').text("Transit Time :", 395, 99 );
+  doc.font('Helvetica-Bold').text("26 days", 445, 99, {lineBreak: false} );
 }
 
 function createTable(doc){
    temp = 130;
-   doc.text(" ",50, temp)
-   doc.rect(50,temp,505,28,5)
+   doc.font('Helvetica').text(" ",45, temp)
+   doc.rect(45,temp,505,28,5)
    .lineWidth(.5)
    .fillAndStroke('#e6e6fa','black');
    
    doc
     .lineWidth(.5)
-    .moveTo(150, temp)
-    .lineTo(150, 144.99599999999998+22)
+    .moveTo(145, temp)
+    .lineTo(145, 144.99599999999998+22)
     .stroke(); 
   doc
     .lineWidth(.5)
-    .moveTo(320, temp)
-    .lineTo(320, 144.99599999999998+22)
+    .moveTo(315, temp)
+    .lineTo(315, 144.99599999999998+22)
     .stroke(); 
   doc
     .lineWidth(.5)
-    .moveTo(455, temp)
-    .lineTo(455, 144.99599999999998+22)
+    .moveTo(450, temp)
+    .lineTo(450, 144.99599999999998+22)
     .stroke();  
 
-    const val1 = "27699.22 INR";
-    const val2 = 27699.22;
+    const val1 = "27,699.22 INR";
+    const val2 = "27,699.22 INR";
     const total = val1+val2;
 
    const table01 = {
     "headers" : ["Charge Type", "Charge Name", "Unit of Measurement", "Price"],
      "rows": [
-         [ "Origin", "All-Inclusive port-to-door rate", "Per CPM", val1 ],
-        //  [ " ", " ", "Per CPM", val1 ],
+         [ "Origin", "All-Inclusive port-to-door rate", "Per CBM", val1 ],
+        //  [ " ", " ", "Per CBM", val1 ],
          [ " ", " ", "Total : ", val1],
      ],
      
-   };
+   };88
    
    doc.table(table01, 
     // [[{text : 'Cell 1', style : 'rounded'}]],
@@ -110,7 +122,7 @@ function createTable(doc){
      columnSpacing: 10,
      padding: 5,
      columnsSize: [100, 170, 135, 100],
-     align: "center",
+     align: "right",
      prepareHeader: () => doc.fontSize(8).fillColor('#091649'),
      prepareRow: (row, indexColumn, indexRow, rectRow, rectCell) => {
  
@@ -129,7 +141,7 @@ function createTable(doc){
        .lineTo(x + width, y + height)
        .stroke();
  
-       doc.fontSize(8).fillColor('#091649');
+       doc.fontSize(10).font('Helvetica').fillColor('#091649');
        temp1 = x;
        temp2 = y + height;
        
@@ -149,9 +161,9 @@ if(temp2 > 426){
    }
   let height =5;
   console.log(temp2); 
-  doc.roundedRect(50, temp2+15, 505, 40, 5).fillAndStroke('#d9d9f0',"#091649");
+  doc.roundedRect(45, temp2+15, 505, 40, 3).fillAndStroke('#DDDDED',"#091649");
   doc.fill('#091649').stroke();
-  doc.fontSize(6);
+  doc.fontSize(7);
   temp2 = temp2+15
   doc.text(" ",55,temp2+height)
   doc.text("All prices mentioned here are excluding duties, local taxes and any incidental charges (if applicable)",{align: "right"})
@@ -162,64 +174,64 @@ if(temp2 > 426){
 
 function addressBox(doc){
   boxWidth = 160;
-  doc.roundedRect(50, temp2+15, 505, boxWidth,5).fillAndStroke('white',"#091649");
+  doc.roundedRect(45, temp2+15, 505, boxWidth,3).fillAndStroke('white',"#091649");
 
-  doc.roundedRect(55, temp2+145, 105, 22,5).fillAndStroke('#d9d9f0');
+  doc.roundedRect(50, temp2+145, 115, 22,3).fillAndStroke('#DDDDED');
   doc.fill('#091649').stroke();
-  doc.image("xhp_correct.png", 60, temp2+151, { width: 10});
-  doc.fontSize(7);
-  doc.text("Origin Custom Clearance", 75, temp2+154, {lineBreak: false} );
+  doc.image("xhp_correct.png", 55, temp2+151, { width: 10});
+  doc.fontSize(8);
+  doc.text("Origin Custom Clearance", 70, temp2+154, {lineBreak: false} );
 
-  doc.roundedRect(170, temp2+145, 125, 22,5).fillAndStroke('white',"#091649");
+  doc.roundedRect(175, temp2+145, 135, 22,3).fillAndStroke('white',"#091649");
   doc.fill('#091649').stroke();
-  doc.image("xhp_cross.png", 175, temp2+151, { width: 10});
-  doc.fontSize(7);
-  doc.text("Destination Custom Clearance", 190, temp2+154, {lineBreak: false} );
+  doc.image("xhp_cross.png", 180, temp2+151, { width: 10});
+  doc.fontSize(8);
+  doc.text("Destination Custom Clearance", 195, temp2+154, {lineBreak: false} );
 
-  let col1LeftPos = 65;
+  let col1LeftPos = 60;
   let height = 30;
   let imageWidth = 15
   let colTop = temp2+height;
   let colWidth = 150;
   let col2LeftPos = colWidth + col1LeftPos + 40;
 
-  doc.fontSize(8)
+  doc.fontSize(10)
     .image("xhp_route.png", col1LeftPos, colTop-2, { width: 10})
-    .text('Origin * Door, IND', col1LeftPos+imageWidth, colTop, {width: colWidth})
+    .text('Origin • Door, IND', col1LeftPos+imageWidth, colTop, {width: colWidth})
     .text('B11/7 & B11/8 IDA Uppal, 500039', col2LeftPos, colTop, {width: colWidth+100})
   colTop = colTop + height;
-  doc.fontSize(8)
+  doc.fontSize(10)
     .image("xhp_route.png", col1LeftPos, colTop-2, { width: 10})
-    .text('Destination * Amazon FC, USA', col1LeftPos+imageWidth, colTop, {width: colWidth})
+    .text('Destination • Amazon FC, USA', col1LeftPos+imageWidth, colTop, {width: colWidth})
     .text('AVP1 - 550 Oak Ridge Road, Hazleton, PA 18202', col2LeftPos, colTop, {width: colWidth+100})
   colTop = colTop + height;
-  doc.fontSize(8)
+  doc.fontSize(10)
     .image("xhp_money.png", col1LeftPos, colTop-2, { width: 10})
     .text('Shipment Incoterms', col1LeftPos+imageWidth, colTop, {width: colWidth})
     .text('DDP', col2LeftPos, colTop, {width: colWidth+100})
   colTop = colTop + height
-  doc.fontSize(8)
+  doc.fontSize(10)
     .image("xhp_kind.png", col1LeftPos, colTop-2, { width: 10})
     .text('Commodity Description', col1LeftPos+imageWidth, colTop, {width: colWidth})
     .text('Kids toys and board games, puzzles', col2LeftPos, colTop, {width: colWidth+100})
 
-  doc.roundedRect(305, temp2+145, 60, 22,5).fillAndStroke('#d9d9f0');
+  doc.roundedRect(320, temp2+145, 60, 22,3).fillAndStroke('#DDDDED');
   doc.fill('#091649').stroke();
-  doc.image("xhp_correct.png", 310, temp2+151, { width: 10});
-  doc.fontSize(7);
-  doc.text("Stackable", 325, temp2+154, {lineBreak: false} );
+  doc.image("xhp_correct.png", 325, temp2+151, { width: 10});
+  doc.fontSize(8);
+  doc.text("Stackable", 340, temp2+154, {lineBreak: false} );
 
-  doc.roundedRect(375, temp2+145, 65, 22,5).fillAndStroke('white',"#091649");
+  doc.roundedRect(390, temp2+145, 65, 22,3).fillAndStroke('white',"#091649");
   doc.fill('#091649').stroke();
-  doc.image("xhp_cross.png", 380, temp2+151, { width: 10});
-  doc.fontSize(7);
-  doc.text("Palletization", 395, temp2+154, {lineBreak: false} );
+  doc.image("xhp_cross.png", 395, temp2+151, { width: 10});
+  doc.fontSize(8);
+  doc.text("Palletization", 410, temp2+154, {lineBreak: false} );
 
-  doc.roundedRect(450, temp2+145, 85, 22,5).fillAndStroke('white',"#091649");;
+  doc.roundedRect(465, temp2+145, 80, 22,3).fillAndStroke('white',"#091649");;
   doc.fill('#091649').stroke();
-  doc.image("xhp_cross.png", 455, temp2+151, { width: 10});
+  doc.image("xhp_cross.png", 470, temp2+151, { width: 10});
   doc.fontSize(7);
-  doc.text("Hazardous Goods", 470, temp2+154, {lineBreak: false} );
+  doc.text("Hazardous Goods", 485, temp2+154, {lineBreak: false} );
 
   temp2 = temp2+boxWidth;
 
@@ -227,9 +239,9 @@ function addressBox(doc){
 
 function itemQuantity(doc){
   let height = 30;
-  doc.roundedRect(50, temp2+height, 505, 100,5).fillAndStroke('white',"#091649");
+  doc.roundedRect(45, temp2+height, 505, 100,3).fillAndStroke('white',"#091649");
   temp2 = temp2+height;
-  doc.roundedRect(55, temp2+10, 495, 22,5).fillAndStroke('#d9d9f0');
+  doc.roundedRect(55, temp2+10, 485, 22,3).fillAndStroke('#DDDDED');
   temp2 = temp2 + 10;
 
   let col1LeftPos = 65;
@@ -244,22 +256,22 @@ function itemQuantity(doc){
     .fill('#091649')
     .text('Items', col1LeftPos, colTop, {width: colWidth})
     .text('Dimensions', col2LeftPos, colTop, {width: colWidth+100})
-    .text('Volume/ Item', col3LeftPos, colTop, {width: colWidth})
+    .text('Volume / Item', col3LeftPos, colTop, {width: colWidth})
     .text('Total Volume', col4LeftPos, colTop, {width: colWidth+100})
   colTop = colTop + height;
   doc
-    .fontSize(8)
+    .fontSize(10)
     .fill('#091649')
     .text('70 Boxes', col1LeftPos, colTop, {width: colWidth})
     .text('38 * 36 * 37 cm', col2LeftPos, colTop, {width: colWidth+100})
     .text('0.0506 CBM', col3LeftPos, colTop, {width: colWidth})
-    .text('3.5431', col4LeftPos, colTop, {width: colWidth+100})
+    .text('3.5431 CBM', col4LeftPos, colTop, {width: colWidth+100})
     
   colTop = colTop + height;
   doc
-    .fontSize(8)
+    .fontSize(10)
     .fill('#091649')
-    .text('Total Cargo Volume : 3.5431 CBM', col1LeftPos, colTop, {width: colWidth+100})
+    .text('Total Cargo Volume : 3.5431 CBM', col1LeftPos -5, colTop, {width: colWidth+100})
     .text('Total Gross Weight : 433 kg', col2LeftPos+50, colTop, {width: colWidth+100})
   
   temp2 = temp2+100;
@@ -268,11 +280,11 @@ function itemQuantity(doc){
 
 function page1Content(doc){
    let content = ""
-    temp1 = 100
+    temp1 = 60
    doc.fontSize(10).font('Helvetica-Bold').fillColor('#091649')
    .text("Quotation Terms and Conditions",50,temp1+30).fillColor('#091649'),
    doc.fontSize(8).font('Helvetica')
-   .text("Overview: ",50,temp1+60).fillColor('#091649'),
+   .text("Overview: ",50,temp1+55).fillColor('#091649'),
 
    doc.fontSize(6).font ("Helvetica").fillColor('#091649'),
    doc.list([
@@ -281,12 +293,12 @@ function page1Content(doc){
     "Please note that the transit time indicated next to Port-Port Information corresponds to the transit time between the two ports and will be revised as updated from time to time. All transit times provided are based on information available to Holaport at the time of providing the quote and are subject to change",
     "In addition to these terms and conditions, Holaport’s digital platform terms and conditions and any other specific Customer terms (which shaSS be shared with the Customer) shall be applicable. and it shall be further construed that on acceptance of the Quotation, these terms will be deemed to have been read over and duly accepted by the you, the Customer.",
     "Unless guaranteed service is expressly stated by Holaport, all services are provided with reasonable dispatch, and Holaport do not guarantee that services wiSS be delivered without delay nor shall Holaport assume liability for penalties, fines, chargebacks, or any other costs associated with delayed services."
-  ], 50, temp1 + 75, {
+  ], 55, temp1 + 75, {
     // this is how automatic line wrapping will work if the width is specified
     lineGap: 2,
     width: 505,
     paragraphGap: 4,
-    align: 'left',
+    align: 'justify',
     listType: 'bullet',
     textIndent: 5,
     bulletRadius: 1, // use this value to almost hide the dots/bullets
@@ -299,16 +311,15 @@ function page1Content(doc){
    doc.list([
     " \"Customer\” shall mean any person who avails the Services " ,
     " \"Sevices\" shall mean the services as more specifically listed on the Quotation, including without \
-    limitation shipping and logistic services, associated services including freight insurance or customs \
-    brokerage services, trade finance and invoice discounting as may be agreed to in the Quotation",
+    limitation shipping and logistic services, associated services including freight insurance or customs\ brokerage services, trade finance and invoice discounting as may be agreed to in the Quotation",
     " \"Quotation \" means the quotation shared with you by Holaport on the digital platform.",
 
-  ], 50, temp1 + 200, {
+  ], 55, temp1 + 200, {
     // this is how automatic line wrapping will work if the width is specified
     lineGap: 2,
     width: 505,
     paragraphGap: 4,
-    align: 'left',
+    align: 'justify',
     listType: 'bullet',
     textIndent: 5,
     bulletRadius: 1, // use this value to almost hide the dots/bullets
@@ -319,15 +330,15 @@ function page1Content(doc){
 
    doc.fontSize(6).font ("Helvetica").fillColor('#091649'),
    doc.list([
-    " Confidentiality : This offer, and quotation shall be the exclusive property of Holaport, and may not be reproduced or distributed in any way or used by the Customer except with the express prior written consent of Holaport. The Customer undertakes to keep this offer and quotation and any information provided by HoSaport strictly confidential and shall not disclose the same to any third party" ,
+    " Confidentiality : This offer, and quotation shall be the exclusive property of Holaport, and may not be reproduced or distributed in any way or used by the Customer except with the express prior written consent of Holaport. The Customer undertakes to keep this offer and quotation and any information provided by HoSaport strictly confidential and shall not disclose the same to any third party." ,
     " Insurance : Unless requested to do so in writing, and confirmed to Customer in writing, Holaport is under no obligation to procure insurance on Customer's behalf. In all cases, Customers shall pay all premiums and costs in connection with procuring necessary insurance.",
     " Payments : ",
-  ], 50, temp1 + 270, {
+  ], 55, temp1 + 270, {
     // this is how automatic line wrapping will work if the width is specified
     lineGap: 2,
     width: 505,
     paragraphGap: 4,
-    align: 'left',
+    align: 'justify',
     listType: 'bullet',
     textIndent: 5,
     bulletRadius: 1, // use this value to almost hide the dots/bullets
@@ -345,7 +356,7 @@ function page1Content(doc){
     paragraphGap: 4,
     bulletIndent: 50,
     listType: 'numbered',
-    align: 'left',
+    align: 'justify',
     //textIndent: 5,
     bulletRadius: 1, // use this value to almost hide the dots/bullets
   });
@@ -358,7 +369,7 @@ function page1Content(doc){
    lineGap: 2,
    width: 505,
    paragraphGap: 4,
-   align: 'left',
+   align: 'justify',
    listType: 'bullet',
    textIndent: 5,
    bulletRadius: 1, // use this value to almost hide the dots/bullets
@@ -383,7 +394,7 @@ function page1Content(doc){
   paragraphGap: 4,
   bulletIndent: 50,
   listType: 'numbered',
-  align: 'left',
+  align: 'justify',
   //textIndent: 5,
   bulletRadius: 1, // use this value to almost hide the dots/bullets
 });
@@ -396,7 +407,7 @@ doc.fontSize(6).font ("Helvetica").fillColor('#091649'),
    lineGap: 2,
    width: 505,
    paragraphGap: 4,
-   align: 'left',
+   align: 'justify',
    listType: 'bullet',
    textIndent: 5,
    bulletRadius: 1, // use this value to almost hide the dots/bullets
@@ -404,7 +415,9 @@ doc.fontSize(6).font ("Helvetica").fillColor('#091649'),
 
  doc.list([
   "All charges such as but not limited to Custom duty, demurrage, port congestion fees, layover fees, pre-pull fees and detention charges will be charged at atuals and will be borne by the Customer without any deviation.",
-  "Custom Duty, demurrage charges must be paid by Customer in advance, unless Holaport agrees in writing to extend credit to the Customer. The granting of credit to a Customer in connection with a particular transaction shall not be considered a waiver of this provision by Holaport."
+  "Custom Duty, demurrage charges must be paid by Customer in advance, unless Holaport agrees in writing to extend credit to the Customer. The granting of credit to a Customer in connection with a particular transaction shall not be considered a waiver of this provision by Holaport.",
+  "Packaging : All shipments must be packaged in cartons, crates, or other packaging suitable for transportation or gandling by in accordance with industry standards. Cargo, which is insufficiently prepared, packed or protected will be, at the Customer/consignee sole risk and expense, including risk to third parties and subject to the terms and conditions of the bill of lading. All of Holaport\’s rights and immunities in the event of loss or damage by reason of that insufficient preparation, packaging or protection are hereby expressly reserved. ",
+   
 ], 60, temp1 + 645, {
   // this is how automatic line wrapping will work if the width is specified
   lineGap: 2,
@@ -412,7 +425,7 @@ doc.fontSize(6).font ("Helvetica").fillColor('#091649'),
   paragraphGap: 4,
   bulletIndent: 50,
   listType: 'numbered',
-  align: 'left',
+  align: 'justify',
   //textIndent: 5,
   bulletRadius: 1, // use this value to almost hide the dots/bullets
 });
@@ -422,21 +435,21 @@ doc.addPage()
 generateHeader(doc);
 doc.fontSize(6).font ("Helvetica").fillColor('#091649'),
   doc.list([
-   "Packaging : All shipments must be packaged in cartons, crates, or other packaging suitable for transportation or gandling by in accordance with industry standards. Cargo, which is insufficiently prepared, packed or protected will be, at the Customer/consignee sole risk and expense, including risk to third parties and subject to the terms and conditions of the bill of lading. All of Holaport\’s rights and immunities in the event of loss or damage by reason of that insufficient preparation, packaging or protection are hereby expressly reserved. ",
+//    "Packaging : All shipments must be packaged in cartons, crates, or other packaging suitable for transportation or gandling by in accordance with industry standards. Cargo, which is insufficiently prepared, packed or protected will be, at the Customer/consignee sole risk and expense, including risk to third parties and subject to the terms and conditions of the bill of lading. All of Holaport\’s rights and immunities in the event of loss or damage by reason of that insufficient preparation, packaging or protection are hereby expressly reserved. ",
    "General Lien and Right to Sell Customer's Property  : "
- ], 50, temp1 , {
+ ], 50, temp1 + 30   , {
    // this is how automatic line wrapping will work if the width is specified
    lineGap: 2,
    width: 505,
    paragraphGap: 4,
-   align: 'left',
+   align: 'justify',
    listType: 'bullet',
    textIndent: 5,
    bulletRadius: 1, // use this value to almost hide the dots/bullets
  });
 
  doc.list([
-  " Holaport, shall have a general and continuing lien on any and all property of Customer coming into Holaport\’s actual or constructive possession or control for monies owed to Holaport with regard to the shipment on which the lien is claimed; a prior shipment(s) and/or both;",
+  " Holaport, shall have a general and continuing lien on any and all property of Customer coming into Holaport’s actual or constructive possession or control for monies owed to Holaport with regard to the shipment on which the lien is claimed; a prior shipment(s) and/or both;",
   " Holaport, shall provide written notice to Customer of its intent to exercise such lien, the exact amount of monies due and owing, as well as any on-going storage or other charges; Holaport, shall notify all parties having an interest in its shipment(s) of Holaport\’s rights and/or the exercise of such lien."
 
 ], 60, temp1 + 45, {
@@ -446,7 +459,7 @@ doc.fontSize(6).font ("Helvetica").fillColor('#091649'),
   paragraphGap: 4,
   bulletIndent: 50,
   listType: 'numbered',
-  align: 'left',
+  align: 'justify',
   //textIndent: 5,
   bulletRadius: 1, // use this value to almost hide the dots/bullets
 });
@@ -468,7 +481,7 @@ doc.fontSize(6).font ("Helvetica").fillColor('#091649'),
    lineGap: 2,
    width: 505,
    paragraphGap: 4,
-   align: 'left',
+   align: 'justify',
    listType: 'bullet',
    textIndent: 5,
    bulletRadius: 1, // use this value to almost hide the dots/bullets
@@ -485,7 +498,7 @@ doc.fontSize(6).font ("Helvetica").fillColor('#091649'),
   paragraphGap: 4,
   bulletIndent: 50,
   listType: 'numbered',
-  align: 'left',
+  align: 'justify',
   //textIndent: 5,
   bulletRadius: 1, // use this value to almost hide the dots/bullets
 });
@@ -500,7 +513,7 @@ doc.list([
   lineGap: 2,
   width: 505,
   paragraphGap: 4,
-  align: 'left',
+  align: 'justify',
   listType: 'bullet',
   textIndent: 5,
   bulletRadius: 1, // use this value to almost hide the dots/bullets
@@ -514,12 +527,12 @@ doc.fontSize(6).font ("Helvetica").fillColor('#091649'),
 doc.list([
    " Special Clauses :"
 
-], 50, temp1 , {
+], 50, temp1 + 30 , {
   // this is how automatic line wrapping will work if the width is specified
   lineGap: 2,
   width: 505,
   paragraphGap: 4,
-  align: 'left',
+  align: 'justify',
   listType: 'bullet',
   textIndent: 5,
   bulletRadius: 1, // use this value to almost hide the dots/bullets
@@ -530,14 +543,14 @@ doc.list([
   " For the avoidance of doubt Holaport cannot be held liable in case of any delays and/ or default in the performance of Services as mentioned under the terms and conditions/agreement/quotation/commercials due to any measures taken by, without limitation, public authorities, port authorities, shipping and any other transportation companies due to the Covid-19 virus, and/or any other epidemic or pandemic outbreaks.",
   
   "Holaport shall not be held liable for any damage or any other additional charges that may accrue as a result of an event of Force Majeure, including without limitation storage charges, which shall be fully borne by Customer."
-], 60, temp1 +15, {
+], 60, temp1 + 45, {
   // this is how automatic line wrapping will work if the width is specified
   lineGap: 2,
   width: 505,
   paragraphGap: 4,
   bulletIndent: 50,
   listType: 'numbered',
-  align: 'left',
+  align: 'justify',
   //textIndent: 5,
   bulletRadius: 1, // use this value to almost hide the dots/bullets
 });
@@ -550,23 +563,29 @@ doc.list([
 
 function generateFooter(doc) {
   doc
-    .fontSize(8)
-    .text(
-      "For any queries please reach out at cs@xhipment.com",
-      50,
-      780,
-      { align: "left", width: 500 }
+    .fontSize(8).text("Need help? Reach us at cs@xhipment.com",50,770,{ align: "center", width: 500 }
     );
+  doc
+    .fontSize(8).text("Happy Xhipping!",50,780,{ align: "center", width: 500 }
+    );
+
+
+    // .image("smile.png", 210, 775, { width: 14 })
 }
 
 function generateHr(doc, y) {
   doc
-    .strokeColor("#ff5120")
+    .strokeColor("#ffb380")
     .lineWidth(1)
-    .moveTo(50, y)
+    .moveTo(45, y)
     .lineTo(550, y)
     .stroke();
+
+
+
 }
+
+
 
 module.exports = {
   createInvoice
