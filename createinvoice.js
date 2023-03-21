@@ -14,7 +14,6 @@ function createInvoice(invoice, path) {
   exchangeRateBox(doc);
   addressBox(doc);
   generateFooter(doc);
-  itemQuantity(doc);
   doc.addPage();
   generateHeader(doc);
   page1Content(doc);
@@ -237,46 +236,7 @@ function addressBox(doc){
 
 }
 
-function itemQuantity(doc){
-  let height = 30;
-  doc.roundedRect(45, temp2+height, 505, 100,3).fillAndStroke('white',"#091649");
-  temp2 = temp2+height;
-  doc.roundedRect(55, temp2+10, 485, 22,3).fillAndStroke('#DDDDED');
-  temp2 = temp2 + 10;
 
-  let col1LeftPos = 65;
-  let colTop = temp2 + 8;
-  let colWidth = 80;
-  let col2LeftPos = colWidth + col1LeftPos + 40;
-  let col3LeftPos = colWidth + col2LeftPos + 40;
-  let col4LeftPos = colWidth + col3LeftPos + 40;
-
-  doc
-    .fontSize(8)
-    .fill('#091649')
-    .text('Items', col1LeftPos, colTop, {width: colWidth})
-    .text('Dimensions', col2LeftPos, colTop, {width: colWidth+100})
-    .text('Volume / Item', col3LeftPos, colTop, {width: colWidth})
-    .text('Total Volume', col4LeftPos, colTop, {width: colWidth+100})
-  colTop = colTop + height;
-  doc
-    .fontSize(10)
-    .fill('#091649')
-    .text('70 Boxes', col1LeftPos, colTop, {width: colWidth})
-    .text('38 * 36 * 37 cm', col2LeftPos, colTop, {width: colWidth+100})
-    .text('0.0506 CBM', col3LeftPos, colTop, {width: colWidth})
-    .text('3.5431 CBM', col4LeftPos, colTop, {width: colWidth+100})
-    
-  colTop = colTop + height;
-  doc
-    .fontSize(10)
-    .fill('#091649')
-    .text('Total Cargo Volume : 3.5431 CBM', col1LeftPos -5, colTop, {width: colWidth+100})
-    .text('Total Gross Weight : 433 kg', col2LeftPos+50, colTop, {width: colWidth+100})
-  
-  temp2 = temp2+100;
-
-}
 
 function page1Content(doc){
    let content = ""
@@ -506,7 +466,7 @@ doc.fontSize(6).font ("Helvetica").fillColor('#091649'),
 doc.list([
   " Services of logistics service providers : The Company engages with logistics service providers to provide the requested services to its customers. If you provide any incomplete or wrong or insufficient information or fail to disclose any required information under law, then you are vicariously liable for the acts of the Company. You agree that you shall indemnify and hold us harmless from any and all claims, losses, penalties or other costs resulting from any such default. In addition to that you hereby agree that if any loss incurred by us, either directly or indirectly, due to any default by you, then you are liable for damages towards the Company.",
   " Customer hereby waives all rights of subrogation against Holaport, its officers, members, overseas partners, and employees, arising out of any loss of or damage to goods or property over the course of the shipment or services.",
-  " Force Majeure : If at any time Holaport ’s performance is or is likely to be affected by any hindrance or risk of any kind not arising from any fault or neglect of Holaport and beyond the control of Holaport (a \“Force Majeure Event\”) and which cannot be avoided by the exercise of reasonable endeavor, Holaport may be excused from performance only to the extent made necessary by the Force Majeure Event and only for the duration of the Force Majeure Event, at no liability to Holaport or Customer. A party affected by a Force Majeure Event shall notify the other party as soon as possible, and the parties shall work together in good faith to find alternative solutions for continuation of the shipment. Should the Force Majeure Event persist for or exceed 30 consecutive days the Customer shall have the right to cancel the shipment with no liability to Holaport, other than payment incurred for services rendered prior to the Force Majeure Event. Holaport shall use reasonable commercial steps to cooperate with Customer in securing the Shipment and shall assist in its handover to Customer or its designated representative required for the same.",
+  " Force Majeure : If at any time Holaport’s performance is or is likely to be affected by any hindrance or risk of any kind not arising from any fault or neglect of Holaport and beyond the control of Holaport (a \“Force Majeure Event\”) and which cannot be avoided by the exercise of reasonable endeavor, Holaport may be excused from performance only to the extent made necessary by the Force Majeure Event and only for the duration of the Force Majeure Event, at no liability to Holaport or Customer. A party affected by a Force Majeure Event shall notify the other party as soon as possible, and the parties shall work together in good faith to find alternative solutions for continuation of the shipment. Should the Force Majeure Event persist for or exceed 30 consecutive days the Customer shall have the right to cancel the shipment with no liability to Holaport, other than payment incurred for services rendered prior to the Force Majeure Event. Holaport shall use reasonable commercial steps to cooperate with Customer in securing the Shipment and shall assist in its handover to Customer or its designated representative required for the same.",
 
 ], 50, temp1 +490, {
   // this is how automatic line wrapping will work if the width is specified
